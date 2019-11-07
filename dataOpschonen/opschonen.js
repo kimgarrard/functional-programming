@@ -89,27 +89,22 @@ function main() {
 
 function changeData(array) {
 	var resultArray =  array.map(el => {
-    el = el.replace(/\//g, '-')
+    el = el.replace(/\//g, "-")
 
-    if(el.endsWith('19')) {
-      el = ''
-    }
+    if(el.endsWith("19")) el = ""
 
     el = el.split("-")
     if (el[0].length == 1) {
       el[0] = "0"+el[0];
 
-    if (el[1].length == 1) {
-      el[1] = "0"+el[1];
+    if (el[1].length == 1) el[1] = "0"+el[1];
 
-    if (el[2].length > 2) {
-      el[2] = el[2].slice(-2);
-    }
-    }
+    if (el[2].length > 2) el[2] = el[2].slice(-2);
     }
 
     return el;
-	})
+  })
+
   return resultArray;
 }
 
