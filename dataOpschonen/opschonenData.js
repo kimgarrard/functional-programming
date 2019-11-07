@@ -88,7 +88,7 @@ function main() {
 }
 
 function changeData(array) {
-	var resultArray =  array.map(el => {
+	return array.map(el => {
     el = el.replace(/\//g, "-")
 
     if(el.endsWith("19")) el = ""
@@ -105,7 +105,6 @@ function changeData(array) {
     return el;
   })
 
-  return resultArray;
 }
 
 main();
