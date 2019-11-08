@@ -84,31 +84,36 @@ let geboortedata = `06-04-00
 
 
 // Main function
-function main() {
-	console.log(changeData(geboortedata))
-}
-
-// ChangeData function
-function changeData(array) {
-	return array.map(el => {
-    el = el.replace(/\//g, "-")
-
-    if(el.endsWith("19")) el = ""
-
-    el = el.split("-")
-    if (el[0].length == 1) {
-      el[0] = "0"+el[0];
-
-    if (el[1].length == 1) el[1] = "0"+el[1];
-
-    if (el[2].length > 2) el[2] = el[2].slice(-2);
-    }
-
-    el = el.join().replace(/\,/g, "-")
-
-    return el;
+function main(data) {
+  return data.map((el) => {
+    return el = replaceSlashes(el)
+    return el = replaceYear2019(el)
+    return el = makeSameDataStructure(el)
   })
-
 }
 
-main()
+// replaceSlashes function
+function replaceSlashes(el) {
+  el = el.replace(/\//g, "-")
+}
+
+// replaceYear2019 function
+function replaceYear2019(el) {
+  if(el.endsWith("19")) el = ""
+}
+
+// replace makeSameDataStructure function
+function makeSameDataStructure() {
+  el = el.split("-")
+  if (el[0].length == 1) {
+    el[0] = "0"+el[0];
+
+  if (el[1].length == 1) el[1] = "0"+el[1];
+
+  if (el[2].length > 2) el[2] = el[2].slice(-2);
+  }
+
+  el = el.join().replace(/\,/g, "-")
+}
+
+console.log(main(geboortedata))
