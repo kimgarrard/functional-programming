@@ -86,9 +86,11 @@ let geboortedata = `06-04-00
 // Main function
 function main(data) {
   return data.map((el) => {
-    return el = replaceSlashes(el)
-    return el = replaceYear2019(el)
-    return el = makeSameDataStructure(el)
+    el = replaceSlashes(el)
+    el = replaceYear2019(el)
+    el = makeSameDataStructure(el)
+
+    return el;
   })
 }
 
