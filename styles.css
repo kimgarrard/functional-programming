@@ -1,29 +1,48 @@
 body {
   margin: 0px;
   overflow: hidden;
+  background-color: #c5faf4;
+}
+
+h1 {
+	font-family: Copperplate, Arial;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  padding: 0.5em;
 }
 
 .sphere {
-  fill: #1176b1;
+  fill: #c5faf4;
+  width: 100%;
 }
 
 .country {
-  fill: lightgrey;
-  stroke: black;
+  fill: #a1a1a1;
   stroke-opacity: 0.1;
+  overflow: hidden;
+  width: 100%;
 }
 
 svg {
-  width: 960px;
-  height: 500px;
+  width: 100vw;
+  height: 100vw;
 }
 
-circle {
+imageDiv {
   fill: white;
 	stroke: black;
   stroke-width: .5;
 }
 
-.circles {
-  width: 5em;
+.images {
+  width: 2em;
+  height: 2em;
+  mix-blend-mode: luminosity;
+}
+
+.images:hover {
+  mix-blend-mode: normal;
 }

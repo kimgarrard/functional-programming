@@ -17,7 +17,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 # een foto per land (met type, img, lat en long van de plaats
 SELECT  (SAMPLE(?cho) AS ?cho) 
-		(SAMPLE(?title) AS ?title) 
+				(SAMPLE(?title) AS ?title) 
         (SAMPLE(?typeLabel) AS ?type) 
         (SAMPLE(?img) AS ?img) 
         (SAMPLE(?lat) AS ?lat)
@@ -47,67 +47,89 @@ WHERE {
 } GROUP BY ?landLabel
 ORDER BY ?landLabel 
 LIMIT 10`
-//Please use your own endpoint when using this 
-const endpoint = "https://api.data.netwerkdigitaalerfgoed.nl/datasets/ivo/NMVW/services/NMVW-40/sparql"
+
+const endpoint = "https://api.data.netwerkdigitaalerfgoed.nl/datasets/ivo/NMVW/services/NMVW-06/sparql"
 
 const svg = select('svg')
-const circleDelay = 10
-const circleSize = 8
 const projection = geoNaturalEarth1()
 const pathGenerator = geoPath().projection(projection)
 
 setupMap()
 drawMap()
-plotLocations()
+data()
 
+//Alle data functies aanroepen
+//Code van Laurens
+async function data() {
+  let data = await loadJSONData(endpoint, query)
+  //pas werken met data wanneer data is omgezet in json
+  data = data.map(cleanData)
+  data = changeImageURL(data)
+  console.log(data)
+  data = plotImages(data)
+}
+
+//Code van Laurens
+//Load the data and return a promise which resolves with said data
+function loadJSONData(url, query){
+  return json(endpoint +"?query="+ encodeURIComponent(query) + "&format=json")
+    .then(data => data.results.bindings)
+}
+
+//Code van Laurens
+//This function gets the nested value out of the object in each property in our data
+function cleanData(data){
+   let result = {}
+    Object.entries(data)
+    	.map(([key, propValue]) => { 		
+				result[key] = propValue.value
+  	})
+   return result
+}
+
+//Vervang 'http' door 'https'
+function changeImageURL(results){
+  results.map(result => {
+    result.img = result.img.replace('http', 'https')
+  })    
+  return results
+}
+
+//Code van Laurens
 function setupMap(){
   svg
     .append('path')
-    .attr('class', 'sphere')
-    .attr('d', pathGenerator({ type: 'Sphere' }))
+      .attr('class', 'sphere')
+      .attr('d', pathGenerator({ type: 'Sphere' }))
 }
 
+//Code van Laurens
 function drawMap() {
-  d3.json('https://unpkg.com/world-atlas@1.1.4/world/110m.json').then(data => {
+  json('https://unpkg.com/world-atlas@1.1.4/world/110m.json').then(data => {
     const countries = feature(data, data.objects.countries);
-    svg
+    svg  
       .selectAll('path')
       .data(countries.features)
       .enter()
       .append('path')
-      .attr('class', 'country')
-      .attr('d', pathGenerator)
+        .attr('class', 'country')
+        .attr('d', pathGenerator)
   })
 }
 
-function plotLocations() {
-  fetch(endpoint +"?query="+ encodeURIComponent(query) + "&format=json")
-    .then(data => data.json())
-  	.then(json => json.results.bindings)
-    .then(results => {
-    //TODO: clean up results in separate function
-    	results.forEach(result => {
-        result.lat = Number(result.lat.value)
-        result.long = Number(result.long.value)
-        result.img = result.img.value.replace('http', 'https')
-      })    
-    	console.log(results)
-      
+function plotImages(data) {
     svg
-        .selectAll('circle')
-        .data(results)
-        .enter()
-        .append('image')
-    		.attr("class", "nodes")
-    		.attr("xlink:href", d => d.img)
-        .attr('class', 'circles')
+      .selectAll('imageDiv')
+      .data(data)
+      .enter()
+  		//dankzij hulp van Laurens
+      .append('image')
+        .attr("xlink:href", d => d.img)
+        .attr('class', 'images')
         .attr('x', function(d) {
           return projection([d.long, d.lat])[0]
         })
         .attr('y', function(d) {
           return projection([d.long, d.lat])[1]
         })
-        .attr('r', '5px')
-    		.attr('fill','url("https://connectoricons-prod.azureedge.net/kusto/icon_1.0.1027.1210.png")')
-  })
 }
