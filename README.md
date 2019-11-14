@@ -3,12 +3,23 @@
 ## Het concept
 Ik wil een wereldkaart maken, waarop alle foto's uit de collectie worden geplot. Je kunt hierdoor de foto's zien op de kaart, en zien waar ze zijn gemaakt. Later wil ik nog interactie toevoegen, dat je door de tijd kan klikken en dat je dan de foto's ziet veranderen. 
 
+<img width="1071" alt="Website" src="https://user-images.githubusercontent.com/43337685/68882923-5713ad80-0710-11ea-82e1-c6cbec8c3702.png">
+
 ## Beschrijving
-Op de wereldkaart zie je per land één foto, die een beeld geeft van de collectie foto's van dit land. De doelgroep is heel breed, het kan eigenlijk voor iedereen leuk zijn om te zien. Omdat de foto's heel variërend zijn is het leuk om er naar te kijken. 
+Op de wereldkaart zie je per land één foto, die een beeld geeft van de collectie foto's van dit land. De doelgroep is heel breed, het kan eigenlijk voor iedereen leuk zijn om te zien. Omdat de foto's heel variërend zijn is het leuk om er naar te kijken. Omdat de foto's heel zwaar zijn, zie je hier 10 foto's. 
 
 ## Data
 
-De data die ik heb gebruikt komt van https://collectie.wereldculturen.nl/. Dit is een verzameling van allerlei objecten over de hele wereld van vroeger. Deze data is enorm breed en kan variëren van maskers uit Afrika tot foto's van dansende mensen in Azië. Om de data op te halen gebruik ik SPARQL, dit is mijn code:
+De data die ik heb gebruikt komt van https://collectie.wereldculturen.nl/. Dit is een verzameling van allerlei objecten over de hele wereld van vroeger. Deze data is enorm breed en kan variëren van maskers uit Afrika tot foto's van dansende mensen in Azië. 
+
+Voor mijn eigen idee heb ik nodig
+* Objecten met type foto
+* Titel van deze objecten
+* Foto van de objecten
+* Longitude en latitude
+* Land waar ze vandaan komen
+
+Omdat er heel veel foto's zijn en er maar een beperkt aantal foto's kunnen worden ingeladen, heb ik mijn query zo geschreven dat er uit elk lan één object wordt opgehaald. Dit zorgt ervoor dat er veel verpreiding is over de hele kaart. 
 
 ```sparql
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -27,7 +38,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 # een foto per land (met type, img, lat en long van de plaats
 SELECT  (SAMPLE(?cho) AS ?cho) 
-				    (SAMPLE(?title) AS ?title) 
+	(SAMPLE(?title) AS ?title) 
         (SAMPLE(?typeLabel) AS ?type) 
         (SAMPLE(?img) AS ?img) 
         (SAMPLE(?lat) AS ?lat)
@@ -57,6 +68,12 @@ WHERE {
 } GROUP BY ?landLabel
 ORDER BY ?landLabel 
 ```
+
+## Data opgeschoond
+
+De data die uit deze query komt heb ik ook opgeschoond. Zo heb ik ervoor gezorgd dat de nesting beter is en zorg ik dat er voor alle images 'https' komt te staan, in plaats van 'http'. De data ziet er in mijn console log als volgt uit:
+
+<img width="652" alt="DataQuery" src="https://user-images.githubusercontent.com/43337685/68883516-81199f80-0711-11ea-90ad-dbd05bb0e963.png">
 
 ## Features
 
