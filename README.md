@@ -2,14 +2,9 @@
 
 ## Het concept
 Ik wil een wereldkaart maken, waarop alle foto's uit de collectie worden geplot. Je kunt hierdoor de foto's zien op de kaart, en zien waar ze zijn gemaakt. Later wil ik nog interactie toevoegen, dat je door de tijd kan klikken en dat je dan de foto's ziet veranderen. 
- 
-![WorldMap_CollageTitle2](https://user-images.githubusercontent.com/43337685/68288942-95acc680-0085-11ea-867f-2aeae3dbbf95.png)
-
 
 ## Beschrijving
-Op de wereldkaart zie je per land één foto, die een beeld geeft van de collectie foto's van dit land. De doelgroep is heel breed, het kan eigenlijk voor iedereen leuk zijn om te zien. Omdat de foto's heel variërend zijn is het leuk om er goed naar te kijken. 
-
-<img width="1596" alt="Foto'sWereld" src="https://user-images.githubusercontent.com/43337685/68856891-e0f85200-06e1-11ea-97a4-a4ad72c9960f.png">
+Op de wereldkaart zie je per land één foto, die een beeld geeft van de collectie foto's van dit land. De doelgroep is heel breed, het kan eigenlijk voor iedereen leuk zijn om te zien. Omdat de foto's heel variërend zijn is het leuk om er naar te kijken. 
 
 ## Data
 
