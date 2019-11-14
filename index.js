@@ -54,17 +54,22 @@ const svg = select('svg')
 const projection = geoNaturalEarth1()
 const pathGenerator = geoPath().projection(projection)
 
+//functies setupMap() en drawMap() van Laurens
+//https://beta.vizhub.com/Razpudding/6b3c5d10edba4c86babf4b6bc204c5f0
 setupMap()
 drawMap()
 data()
 
 //Alle data functies aanroepen
 //Code van Laurens
+//https://beta.vizhub.com/Razpudding/2e039bf6e39a421180741285a8f735a3
 async function data() {
   let data = await loadJSONData(endpoint, query)
   //pas werken met data wanneer data is omgezet in json
   data = data.map(cleanData)
   data = changeImageURL(data)
+  //code van Laurens, aangepast naar type
+  // data = transformData(data)
   console.log(data)
   data = plotImages(data)
 }
@@ -95,7 +100,17 @@ function changeImageURL(results){
   return results
 }
 
-//Code van Laurens
+// //Nest the data per type
+// function transformData(source){
+//   let transformed =  d3.nest()
+// 		.key(function(d) { return d.type; })
+// 		.entries(source);
+//   transformed.forEach(type => {
+//     type.amount = type.values.length
+//   })
+//   return transformed
+// }
+
 function setupMap(){
   svg
     .append('path')
@@ -103,7 +118,6 @@ function setupMap(){
       .attr('d', pathGenerator({ type: 'Sphere' }))
 }
 
-//Code van Laurens
 function drawMap() {
   json('https://unpkg.com/world-atlas@1.1.4/world/110m.json').then(data => {
     const countries = feature(data, data.objects.countries);
