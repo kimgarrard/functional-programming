@@ -46,7 +46,7 @@ WHERE {
 
 } GROUP BY ?landLabel
 ORDER BY ?landLabel 
-LIMIT 5`
+LIMIT 10`
 //Please use your own endpoint when using this 
 const endpoint = "https://api.data.netwerkdigitaalerfgoed.nl/datasets/ivo/NMVW/services/NMVW-40/sparql"
 
@@ -89,6 +89,7 @@ function plotLocations() {
     	results.forEach(result => {
         result.lat = Number(result.lat.value)
         result.long = Number(result.long.value)
+        result.img = result.img.value.replace('http', 'https')
       })    
     	console.log(results)
       
@@ -97,8 +98,8 @@ function plotLocations() {
         .data(results)
         .enter()
         .append('image')
-    	  .attr("class", "nodes")
-    		.attr("xlink:href", d => d.img.value)
+    		.attr("class", "nodes")
+    		.attr("xlink:href", d => d.img)
         .attr('class', 'circles')
         .attr('x', function(d) {
           return projection([d.long, d.lat])[0]
