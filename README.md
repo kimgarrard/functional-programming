@@ -77,13 +77,16 @@ De data die uit deze query komt heb ik ook opgeschoond. Zo heb ik ervoor gezorgd
 
 ## Features
 
-- [ ] Foto's geplot op een wereldkaart
+- [x] Foto's geplot op een wereldkaart
 - [ ] Klikken door de tijd, je ziet de verandering van de foto's
-- [ ] Klikken op de foto's, je ziet de foto groot met een title en beschrijving. 
+- [ ] Klikken op de foto's, je ziet de foto groot met een title en beschrijving 
 
 ## Bronnen
 * [Clean Data](https://www.freecodecamp.org/news/the-junior-developers-guide-to-writing-super-clean-and-readable-code-cd2568e08aae/)
 * [Functional Programming doc](https://docs.google.com/presentation/d/1ynCL4B4DyQ65V3cvjfZvbT2a9YrITbhUUUICoOjAP4c/edit#slide=id.g7081ab7627_0_38)
+* [Introductie D3](https://d3js.org/#introduction)
+* [YouTube tutorials D3 - 1](https://www.youtube.com/watch?v=-RQWC4I2I1s&list=PL9yYRbwpkykvOXrZumtZWbuaXWHvjD8gi&index=4)
+* [YouTube tutorials D3 - 2](https://www.youtube.com/watch?v=IyIAR65G-GQ&list=PL9yYRbwpkykvOXrZumtZWbuaXWHvjD8gi&index=12)
 
 ## Wat ik heb geleerd
 * Data opschonen
