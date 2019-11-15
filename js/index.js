@@ -75,7 +75,7 @@ async function data() {
 }
 
 //Code van Laurens
-//Load the data and return a promise which resolves with said data
+//Data wordt geladen en omgezet in json
 function loadJSONData(url, query){
   return json(endpoint +"?query="+ encodeURIComponent(query) + "&format=json")
     .then(data => data.results.bindings)
