@@ -72,6 +72,7 @@ async function data() {
   // data = transformData(data)
   console.log(data)
   data = plotImages(data)
+  drawMapLines()
 }
 
 //Code van Laurens
@@ -146,4 +147,17 @@ function plotImages(data) {
         .attr('y', function(d) {
           return projection([d.long, d.lat])[1]
         })
+}
+
+function drawMapLines() {
+  json('https://unpkg.com/world-atlas@1.1.4/world/110m.json').then(data => {
+    const countries = feature(data, data.objects.countries);
+    svg  
+      .selectAll('countryLines')
+      .data(countries.features)
+      .enter()
+      .append('path')
+        .attr('class', 'countryLines')
+        .attr('d', pathGenerator)
+  })
 }

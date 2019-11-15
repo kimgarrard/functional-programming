@@ -6,7 +6,6 @@ body {
 
 h1 {
 	font-family: Copperplate, Arial;
-  font-size: 2.5em;
 }
 
 div {
@@ -22,9 +21,19 @@ div {
 
 .country {
   fill: #a1a1a1;
-  stroke-opacity: 0.1;
   overflow: hidden;
   width: 100%;
+}
+
+.countryLines {
+  width: 100vw;
+  height: 100vw;
+  fill: none;
+  stroke: white;
+  stroke-width: 0.2;
+  stroke-opacity: 1;
+  overflow: hidden;
+  position: absolute;
 }
 
 svg {
