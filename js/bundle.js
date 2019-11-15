@@ -16,18 +16,18 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 # een foto per land (met type, img, lat en long van de plaats
-SELECT  (SAMPLE(?cho) AS ?cho) 
-				(SAMPLE(?title) AS ?title) 
-        (SAMPLE(?typeLabel) AS ?type) 
-        (SAMPLE(?img) AS ?img) 
+SELECT  (SAMPLE(?cho) AS ?cho)
+				(SAMPLE(?title) AS ?title)
+        (SAMPLE(?typeLabel) AS ?type)
+        (SAMPLE(?img) AS ?img)
         (SAMPLE(?lat) AS ?lat)
         (SAMPLE(?long) AS ?long)
-        ?landLabel 
+        ?landLabel
 
 WHERE {
   # vind alleen foto's
   <https://hdl.handle.net/20.500.11840/termmaster1397> skos:narrower* ?type .
-  ?type skos:prefLabel ?typeLabel .   
+  ?type skos:prefLabel ?typeLabel .
   ?cho edm:object ?type .
 
   # ?cho dc:title ?title .
@@ -39,13 +39,13 @@ WHERE {
   ?place skos:exactMatch/gn:parentCountry ?land .
   # ?place skos:prefLabel ?placeName .
   ?land gn:name ?landLabel .
-  
+
   # vind bij de plaats van de foto de lat/long
   ?place skos:exactMatch/wgs84:lat ?lat .
-  ?place skos:exactMatch/wgs84:long ?long .      
+  ?place skos:exactMatch/wgs84:long ?long .
 
 } GROUP BY ?landLabel
-ORDER BY ?landLabel 
+ORDER BY ?landLabel
 LIMIT 10`;
 
   const endpoint = "https://api.data.netwerkdigitaalerfgoed.nl/datasets/ivo/NMVW/services/NMVW-06/sparql";
@@ -72,7 +72,6 @@ LIMIT 10`;
     // data = transformData(data)
     console.log(data);
     data = plotImages(data);
-    drawMapLines();
   }
 
   //Code van Laurens
@@ -87,7 +86,7 @@ LIMIT 10`;
   function cleanData(data){
      let result = {};
       Object.entries(data)
-      	.map(([key, propValue]) => { 		
+      	.map(([key, propValue]) => {
   				result[key] = propValue.value;
     	});
      return result
@@ -97,7 +96,7 @@ LIMIT 10`;
   function changeImageURL(results){
     results.map(result => {
       result.img = result.img.replace('http', 'https');
-    });    
+    });
     return results
   }
 
@@ -122,7 +121,7 @@ LIMIT 10`;
   function drawMap() {
     d3.json('https://unpkg.com/world-atlas@1.1.4/world/110m.json').then(data => {
       const countries = topojson.feature(data, data.objects.countries);
-      svg  
+      svg
         .selectAll('path')
         .data(countries.features)
         .enter()
@@ -149,18 +148,6 @@ LIMIT 10`;
           });
   }
 
-  function drawMapLines() {
-    d3.json('https://unpkg.com/world-atlas@1.1.4/world/110m.json').then(data => {
-      const countries = topojson.feature(data, data.objects.countries);
-      svg  
-        .selectAll('countryLines')
-        .data(countries.features)
-        .enter()
-        .append('path')
-          .attr('class', 'countryLines')
-          .attr('d', pathGenerator);
-    });
-  }
 
 }(d3, topojson));
 
