@@ -69,6 +69,9 @@ WHERE {
 ORDER BY ?landLabel 
 ```
 
+### Lege waardes
+Mijn data is dus verdeeld in één foto per land, er komen geen lege waardes uit de data zelf. Elke foto heeft een titel, een afbeelding, een longitude & latitude en een land. Wel zijn er niet van alle landen ook objecten, dit zou je ook kunnen zien als lege waardes. Bij deze landen laat ik het plaatje niet zien op de kaart. 
+
 ## Data opgeschoond
 
 De data die uit deze query komt heb ik ook opgeschoond. Zo heb ik ervoor gezorgd dat de nesting beter is en zorg ik dat er voor alle images 'https' komt te staan, in plaats van 'http'. De data ziet er in mijn console log als volgt uit:
