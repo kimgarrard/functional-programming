@@ -61,7 +61,8 @@ drawMap()
 data()
 
 //Alle data functies aanroepen
-//Code van Laurens
+//Code opzet van Laurens
+//Function changeImageURL() en plotImages() zelf toegevoegd
 //https://beta.vizhub.com/Razpudding/2e039bf6e39a421180741285a8f735a3
 async function data() {
   let data = await loadJSONData(endpoint, query)
@@ -81,7 +82,7 @@ function loadJSONData(url, query){
     .then(data => data.results.bindings)
 }
 
-//Code van Laurens
+//Code van Laurens, parameter (data) aangepast
 //This function gets the nested value out of the object in each property in our data
 function cleanData(data){
    let result = {}
@@ -136,10 +137,11 @@ function plotImages(data) {
       .selectAll('imageDiv')
       .data(data)
       .enter()
-  		//dankzij hulp van Laurens
       .append('image')
+				//met d => d.img heeft Laurens mee geholpen
         .attr("xlink:href", d => d.img)
         .attr('class', 'images')
+				//c voor x&y weghalen heeft Laurens mee geholepn
         .attr('x', function(d) {
           return projection([d.long, d.lat])[0]
         })
