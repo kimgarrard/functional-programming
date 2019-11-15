@@ -69,6 +69,9 @@ WHERE {
 ORDER BY ?landLabel 
 ```
 
+### Lege waardes
+Mijn data is dus verdeeld in één foto per land, er komen geen lege waardes uit de data zelf. Elke foto heeft een titel, een afbeelding, een longitude & latitude en een land. Wel zijn er niet van alle landen ook objecten, dit zou je ook kunnen zien als lege waardes. Bij deze landen laat ik het plaatje niet zien op de kaart. 
+
 ## Data opgeschoond
 
 De data die uit deze query komt heb ik ook opgeschoond. Zo heb ik ervoor gezorgd dat de nesting beter is en zorg ik dat er voor alle images 'https' komt te staan, in plaats van 'http'. De data ziet er in mijn console log als volgt uit:
@@ -88,6 +91,10 @@ De data die uit deze query komt heb ik ook opgeschoond. Zo heb ik ervoor gezorgd
 * [YouTube tutorials D3 - 1](https://www.youtube.com/watch?v=-RQWC4I2I1s&list=PL9yYRbwpkykvOXrZumtZWbuaXWHvjD8gi&index=4)
 * [YouTube tutorials D3 - 2](https://www.youtube.com/watch?v=IyIAR65G-GQ&list=PL9yYRbwpkykvOXrZumtZWbuaXWHvjD8gi&index=12)
 * [D3 World Map - van Laurens](https://beta.vizhub.com/Razpudding/6b3c5d10edba4c86babf4b6bc204c5f0)
+
+## Credits
+* Laurens, code van D3
+* Manouk
 
 ## Wat ik heb geleerd
 * Data opschonen
